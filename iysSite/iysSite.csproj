@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>69e38e65-7489-497d-b53c-1123a35e4e89</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MailKit" Version="4.15.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6"/>
+    </ItemGroup>
+
+</Project>

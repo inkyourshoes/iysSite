@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink Your Shoes — Commission Request</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e;
+      color: #e8e8e8;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    header h1 span {
+      color: #c084fc;
+    }
+
+    header p {
+      color: #888;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .type-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .type-toggle input[type="radio"] { display: none; }
+
+    .type-toggle label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border: 2px solid #333;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #aaa;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .type-toggle input[type="radio"]:checked + label {
+      border-color: #c084fc;
+      color: #fff;
+      background: #1e1230;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #e8e8e8;
+      font-size: 0.95rem;
+      padding: 0.6rem 0.75rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: #c084fc;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #c084fc;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .upload-area {
+      border: 2px dashed #333;
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+
+    .upload-area:hover { border-color: #c084fc; }
+
+    .upload-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-area p {
+      font-size: 0.88rem;
+      color: #666;
+    }
+
+    .upload-area p strong { color: #c084fc; }
+
+    #file-list {
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: #888;
+    }
+
+    #file-list span {
+      display: inline-block;
+      background: #222;
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      margin: 0.2rem 0.2rem 0 0;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      margin-top: 1.75rem;
+      padding: 0.85rem;
+      background: #c084fc;
+      color: #0e0e0e;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, opacity 0.2s;
+    }
+
+    button[type="submit"]:hover { background: #a855f7; }
+    button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #status {
+      margin-top: 1.25rem;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    #status.success {
+      display: block;
+      background: #0f2e1a;
+      border: 1px solid #1a5c30;
+      color: #4ade80;
+    }
+
+    #status.error {
+      display: block;
+      background: #2e0f0f;
+      border: 1px solid #5c1a1a;
+      color: #f87171;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ink Your <span>Shoes</span></h1>
+  <p>Submit a commission request below and we'll be in touch.</p>
+</header>
+
+<div class="card">
+  <form id="commission-form" novalidate>
+
+    <!-- Commission type -->
+    <div class="type-toggle">
+      <input type="radio" name="CommissionType" id="type-shoes" value="1" checked />
+      <label for="type-shoes">Custom Shoes</label>
+
+      <input type="radio" name="CommissionType" id="type-tattoo" value="0" />
+      <label for="type-tattoo">Tattoo</label>
+    </div>
+
+    <!-- Contact -->
+    <div class="section-label">Your Info</div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="FirstName">First Name</label>
+        <input type="text" id="FirstName" name="FirstName" maxlength="50" placeholder="Jane" />
+      </div>
+      <div class="field">
+        <label for="Email">Email <span style="color:#f87171">*</span></label>
+        <input type="email" id="Email" name="Email" maxlength="100" placeholder="jane@example.com" required />
+      </div>
+    </div>
+
+    <!-- Shoes section -->
+    <div id="shoes-section">
+      <div class="section-label">Shoe Details</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="Shoes.BrandType">Shoe Brand <span style="color:#f87171">*</span></label>
+          <input type="text" id="Shoes.BrandType" name="Shoes.BrandType" maxlength="100" placeholder="e.g. Nike Air Force 1" />
+        </div>
+        <div class="field">
+          <label for="Shoes.Size">Size <span style="color:#f87171">*</span></label>
+          <input type="text" id="Shoes.Size" name="Shoes.Size" maxlength="20" placeholder="e.g. 10 US" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="Shoes.CustomStyleColorsIdeas">Style / Colors / Ideas <span style="color:#f87171">*</span></label>
+        <textarea id="Shoes.CustomStyleColorsIdeas" name="Shoes.CustomStyleColorsIdeas" maxlength="2000"
+          placeholder="Describe the design you have in mind — colors, themes, references..."></textarea>
+      </div>
+    </div>
+
+    <!-- Tattoo section -->
+    <div id="tattoo-section" class="hidden">
+      <div class="section-label">Tattoo Details</div>
+
+      <div class="field">
+        <label for="Tattoo.Description">Description <span style="color:#f87171">*</span></label>
+        <textarea id="Tattoo.Description" name="Tattoo.Description" maxlength="2000"
+          placeholder="Describe the tattoo you want — style, subject, mood, references..."></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="Tattoo.Size">Approx. Size <span style="color:#f87171">*</span></label>
+          <input type="text" id="Tattoo.Size" name="Tattoo.Size" maxlength="100" placeholder="e.g. Palm-sized" />
+        </div>
+        <div class="field">
+          <label for="Tattoo.BodyPlacement">Body Placement <span style="color:#f87171">*</span></label>
+          <input type="text" id="Tattoo.BodyPlacement" name="Tattoo.BodyPlacement" maxlength="100" placeholder="e.g. Left forearm" />
+        </div>
+      </div>
+    </div>
+
+    <!-- File upload -->
+    <div class="section-label">Inspiration Images</div>
+    <div class="field">
+      <div class="upload-area">
+        <input type="file" id="InspirationImages" name="InspirationImages" multiple
+          accept="image/jpeg,image/png,image/webp,image/gif" />
+        <p><strong>Click to upload</strong> or drag and drop</p>
+        <p>JPG, PNG, WEBP, GIF — optional</p>
+      </div>
+      <div id="file-list"></div>
+    </div>
+
+    <button type="submit" id="submit-btn">Submit Commission Request</button>
+
+    <div id="status"></div>
+
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('commission-form');
+  const shoesSection = document.getElementById('shoes-section');
+  const tattooSection = document.getElementById('tattoo-section');
+  const fileInput = document.getElementById('InspirationImages');
+  const fileList = document.getElementById('file-list');
+  const submitBtn = document.getElementById('submit-btn');
+  const status = document.getElementById('status');
+
+  // Toggle sections based on commission type
+  document.querySelectorAll('input[name="CommissionType"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const isShoes = document.getElementById('type-shoes').checked;
+      shoesSection.classList.toggle('hidden', !isShoes);
+      tattooSection.classList.toggle('hidden', isShoes);
+    });
+  });
+
+  // Show selected file names
+  fileInput.addEventListener('change', () => {
+    fileList.innerHTML = '';
+    Array.from(fileInput.files).forEach(f => {
+      const span = document.createElement('span');
+      span.textContent = f.name;
+      fileList.appendChild(span);
+    });
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = '';
+    status.style.display = 'none';
+
+    const email = document.getElementById('Email').value.trim();
+    if (!email) {
+      showStatus('error', 'Email is required.');
+      return;
+    }
+
+    const isShoes = document.getElementById('type-shoes').checked;
+
+    if (isShoes) {
+      const brand = document.getElementById('Shoes.BrandType').value.trim();
+      const size = document.getElementById('Shoes.Size').value.trim();
+      const ideas = document.getElementById('Shoes.CustomStyleColorsIdeas').value.trim();
+      if (!brand || !size || !ideas) {
+        showStatus('error', 'Please fill in all shoe details.');
+        return;
+      }
+    } else {
+      const desc = document.getElementById('Tattoo.Description').value.trim();
+      const size = document.getElementById('Tattoo.Size').value.trim();
+      const placement = document.getElementById('Tattoo.BodyPlacement').value.trim();
+      if (!desc || !size || !placement) {
+        showStatus('error', 'Please fill in all tattoo details.');
+        return;
+      }
+    }
+
+    const data = new FormData(form);
+
+    // Remove fields for the inactive commission type
+    if (isShoes) {
+      data.delete('Tattoo.Description');
+      data.delete('Tattoo.Size');
+      data.delete('Tattoo.BodyPlacement');
+    } else {
+      data.delete('Shoes.BrandType');
+      data.delete('Shoes.Size');
+      data.delete('Shoes.CustomStyleColorsIdeas');
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+      const res = await fetch('/commissions', {
+        method: 'POST',
+        body: data
+      });
+
+      if (res.ok) {
+        showStatus('success', "Your commission request has been received! Check your email for a confirmation — we'll be in touch soon.");
+        form.reset();
+        fileList.innerHTML = '';
+        shoesSection.classList.remove('hidden');
+        tattooSection.classList.add('hidden');
+      } else {
+        const body = await res.json().catch(() => null);
+        const msg = body?.errors
+          ? Object.values(body.errors).flat().join(' ')
+          : 'Something went wrong. Please try again.';
+        showStatus('error', msg);
+      }
+    } catch {
+      showStatus('error', 'Could not reach the server. Please check your connection and try again.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Commission Request';
+    }
+  });
+
+  function showStatus(type, msg) {
+    status.className = type;
+    status.textContent = msg;
+  }
+</script>
+
+</body>
+</html>
