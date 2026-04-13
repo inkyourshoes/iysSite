@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink Your Shoes — About</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e url('projectWallpaper.jpg') no-repeat fixed center;
+      background-size: 98% auto;
+      color: #e8e8e8;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 35%;
+      background: linear-gradient(to bottom, black, transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      color: #ffd5b3;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #fff; }
+    nav a.active { color: #FF724C; border-bottom: 2px solid #FF724C; padding-bottom: 2px; }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #FF724C;
+      -webkit-text-stroke: 2px white;
+      text-shadow:
+        0 0 8px rgba(255, 138, 0, 0.6),
+        0 0 15px rgba(255, 138, 0, 0.4);
+    }
+
+    header h1 span {
+      color: #FF724C;
+      -webkit-text-stroke: 2px white;
+    }
+
+    .card {
+      background: rgba(26, 26, 26, 0.93);
+      border: 2px solid #00CAB1;
+      border-radius: 12px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ff9e9e;
+      margin-bottom: 1.25rem;
+    }
+
+    .card p {
+      color: #ffffe0;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/">Commissions</a>
+  <a href="/about.html" class="active">About</a>
+  <a href="/gallery.html">Gallery</a>
+</nav>
+
+<header>
+  <h1>Ink Your <span>Shoes</span></h1>
+</header>
+
+<div class="card">
+  <h2>About the Brand</h2>
+  <p>
+    Yo! 
+    <p>
+    Welcome to my first, self-created website! My name is Edward Raff and I am 35 years old, living in Virginia Beach. 
+  <p>
+    I love to play basketball, workout, skate, snowboard, chill with my gf, and create art! 
+  </p>
+  
+  <p>
+    I have enjoyed a variety of jobs over the last decade, primarily teaching.  However, while in college, I 
+    was always interested in tattooing. Fortunately, my artist, Rob, was a friend.  I left his house with a new tattoo, and all 
+    the equipment needed to pursue the idea.  Somehow, along that journey, I ended up making hundreds of customized pairs of shoes. 
+    I've designed shoes for newborns, students of mine, and even some of my favorite professional athletes! </p>
+  <p>
+    I am so grateful for the opportunity to create art and connect with so many unique people. 
+    Thank you for visiting my site!
+  </p>
+  
+  
+  
+  <p>
+  </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink Your Shoes — Gallery</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e url('projectWallpaper.jpg') no-repeat fixed center;
+      background-size: 98% auto;
+      color: #e8e8e8;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 35%;
+      background: linear-gradient(to bottom, black, transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      color: #ffd5b3;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #fff; }
+    nav a.active { color: #FF724C; border-bottom: 2px solid #FF724C; padding-bottom: 2px; }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #FF724C;
+      -webkit-text-stroke: 2px white;
+      text-shadow:
+        0 0 8px rgba(255, 138, 0, 0.6),
+        0 0 15px rgba(255, 138, 0, 0.4);
+    }
+
+    header h1 span {
+      color: #FF724C;
+      -webkit-text-stroke: 2px white;
+    }
+
+    .gallery-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid white;
+      box-shadow: 0 0 8px 2px rgba(255, 182, 193, 0.7);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      border-color: #00CAB1;
+    }
+
+    .empty {
+      position: relative;
+      z-index: 1;
+      color: #555;
+      font-size: 1rem;
+      margin-top: 3rem;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      border: 3px solid #00CAB1;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/">Commissions</a>
+  <a href="/about.html">About</a>
+  <a href="/gallery.html" class="active">Gallery</a>
+</nav>
+
+<header>
+  <h1>Ink Your <span>Shoes</span></h1>
+</header>
+
+<div class="gallery-grid" id="gallery">
+  <img src="g1.JPG" alt="Image 1"/>
+  <img src="g2.JPG" alt="Image 2"/>
+  <img src="g3.JPG" alt="Image 3"/>
+  <img src="g4.JPG" alt="Image 4"/>
+  <img src="g5.JPG" alt="Image 5"/>
+  <img src="g6.JPG" alt="Image 6"/>
+  <img src="g7.JPG" alt="Image 7"/>
+  <img src="g8.JPG" alt="Image 8"/>
+  <img src="g9.JPG" alt="Image 9"/>
+  <img src="g10.JPG" alt="Image 10"/>
+  <img src="g11.JPG" alt="Image 11"/>
+  <img src="g12.JPG" alt="Image 12"/>
+  <img src="g13.JPG" alt="Image 13"/>
+  
+  <img src="tg1.JPG" alt="Image 19"/>
+  <img src="tg3.PNG" alt="Image 21"/>
+  
+  <img src="tg8.PNG" alt="Image 26"/>
+  <img src="tg9.PNG" alt="Image 27"/>
+  <img src="tg10.jpg" alt="Image 28"/>
+ 
+  
+  <!-- Add images here like: <img src="your-photo.jpg" alt="description" /> -->
+</div>
+
+<p class="empty" id="empty-msg">No images yet — check back soon!</p>
+
+<div id="lightbox">
+  <span id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script>
+  const gallery = document.getElementById('gallery');
+  const emptyMsg = document.getElementById('empty-msg');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  if (gallery.children.length > 0) emptyMsg.style.display = 'none';
+
+  gallery.addEventListener('click', e => {
+    if (e.target.tagName === 'IMG') {
+      lightboxImg.src = e.target.src;
+      lightboxImg.alt = e.target.alt;
+      lightbox.classList.add('open');
+    }
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', () => {
+    lightbox.classList.remove('open');
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) lightbox.classList.remove('open');
+  });
+</script>
+
+</body>
+</html>

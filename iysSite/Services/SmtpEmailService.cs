@@ -31,6 +31,12 @@ public class SmtpEmailService : IEmailService
             TextBody = BuildEmailBody(request, savedFiles)
         };
 
+        foreach (var filePath in savedFiles)
+        {
+            if (File.Exists(filePath))
+                builder.Attachments.Add(filePath);
+        }
+
         message.Body = builder.ToMessageBody();
 
         using var client = new SmtpClient();
@@ -131,7 +137,7 @@ public class SmtpEmailService : IEmailService
         {
             foreach (var file in savedFiles)
             {
-                sb.AppendLine($"- {file}");
+                sb.AppendLine($"- {Path.GetFileName(file)}");
             }
         }
 

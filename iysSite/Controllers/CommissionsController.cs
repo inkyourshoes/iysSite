@@ -39,7 +39,7 @@ public class CommissionsController : ControllerBase
             await using var stream = System.IO.File.Create(filePath);
             await file.CopyToAsync(stream);
 
-            savedFiles.Add(safeFileName);
+            savedFiles.Add(filePath);
         }
 
         await _emailService.SendCommissionRequestEmailAsync(request, savedFiles);
