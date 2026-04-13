@@ -26,6 +26,7 @@ public class SmtpEmailService : IEmailService
         message.Subject = $"New {request.CommissionType} commission request from {request.FirstName}".Trim();
         message.TextBody = BuildEmailBody(request, savedFiles);
 
+        message.Attachments = new List<EmailAttachment>();
         foreach (var filePath in savedFiles)
         {
             if (!File.Exists(filePath)) continue;
