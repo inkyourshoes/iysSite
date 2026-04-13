@@ -5,3 +5,10 @@ riderModule.iml
 /_ReSharper.Caches/
 appsettings*.json
 !appsettings.Example.json
+
+# Uploads folder
+iysSite/Uploads/
+
+# HEIC image files
+*.heic
+*.HEIC
