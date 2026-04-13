@@ -26,6 +26,17 @@ public class SmtpEmailService : IEmailService
         message.Subject = $"New {request.CommissionType} commission request from {request.FirstName}".Trim();
         message.TextBody = BuildEmailBody(request, savedFiles);
 
+        foreach (var filePath in savedFiles)
+        {
+            if (!File.Exists(filePath)) continue;
+            var bytes = await File.ReadAllBytesAsync(filePath);
+            message.Attachments.Add(new EmailAttachment
+            {
+                Filename = Path.GetFileName(filePath),
+                Content = bytes,
+            });
+        }
+
         await _resend.EmailSendAsync(message);
     }
 
