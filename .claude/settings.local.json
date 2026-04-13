@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/inkyourshoes/repos/iysSiteSln/*.JPG)",
+      "Bash(mkdir -p /Users/inkyourshoes/repos/iysSiteSln/iysSite/wwwroot)",
+      "Bash(mv IWP.jpg IWPP.jpg about.html gallery.html index.html iysWALLPAPER projectWallpaper.jpg g*.JPG g*.jpg tg*.JPG tg*.jpg tg*.PNG tg*.HEIC tg*.heic g*.heic iysSite/wwwroot/)",
+      "Bash(ls *.JPG *.jpg *.PNG *.html *.heic *.HEIC)",
+      "Bash(mv IWP.jpg IWPP.jpg about.html gallery.html index.html iysWALLPAPER projectWallpaper.jpg iysSite/wwwroot/)",
+      "Bash(mv g1.JPG g2.JPG g3.JPG g4.JPG g5.JPG g6.JPG g7.JPG g8.JPG g9.JPG g10.JPG g11.JPG g12.JPG g13.JPG iysSite/wwwroot/)",
+      "Bash(mv tg1.JPG tg10.jpg tg3.PNG tg8.PNG tg9.PNG iysSite/wwwroot/)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(dotnet add:*)",
+      "Bash(dotnet build:*)"
+    ]
+  }
+}
