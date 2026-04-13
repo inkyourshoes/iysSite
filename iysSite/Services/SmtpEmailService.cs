@@ -44,7 +44,7 @@ public class SmtpEmailService : IEmailService
         await client.ConnectAsync(
             _emailSettings.Host,
             _emailSettings.Port,
-            SecureSocketOptions.StartTls);
+            SecureSocketOptions.Auto);
 
         await client.AuthenticateAsync(
             _emailSettings.UserName,
@@ -87,7 +87,7 @@ public class SmtpEmailService : IEmailService
         await client.ConnectAsync(
             _emailSettings.Host,
             _emailSettings.Port,
-            SecureSocketOptions.StartTls);
+            SecureSocketOptions.Auto);
 
         await client.AuthenticateAsync(
             _emailSettings.UserName,
