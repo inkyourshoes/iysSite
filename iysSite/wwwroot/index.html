@@ -263,6 +263,44 @@
     }
 
     .hidden { display: none !important; }
+
+    #thank-you-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #thank-you-modal.active {
+      display: flex;
+    }
+    #thank-you-modal .modal-box {
+      background: #1a1a2e;
+      border: 1px solid #7c3aed;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+    #thank-you-modal .modal-box p {
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    #thank-you-modal .modal-box button {
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    #thank-you-modal .modal-box button:hover { background: #a855f7; }
   </style>
 </head>
 <body>
@@ -367,6 +405,13 @@
   </form>
 </div>
 
+<div id="thank-you-modal">
+  <div class="modal-box">
+    <p>Thanks for the submission... I will be in touch!<br><br>-Edward @inkyourshoes</p>
+    <button id="modal-close">Close</button>
+  </div>
+</div>
+
 <script>
   const form = document.getElementById('commission-form');
   const shoesSection = document.getElementById('shoes-section');
@@ -375,6 +420,8 @@
   const fileList = document.getElementById('file-list');
   const submitBtn = document.getElementById('submit-btn');
   const status = document.getElementById('status');
+  const thankYouModal = document.getElementById('thank-you-modal');
+  document.getElementById('modal-close').addEventListener('click', () => thankYouModal.classList.remove('active'));
 
   // Toggle sections based on commission type
   document.querySelectorAll('input[name="CommissionType"]').forEach(radio => {
@@ -449,7 +496,7 @@
       });
 
       if (res.ok) {
-        showStatus('success', "Your commission request has been received! Check your email for a confirmation — we'll be in touch soon.");
+        thankYouModal.classList.add('active');
         form.reset();
         fileList.innerHTML = '';
         shoesSection.classList.remove('hidden');
